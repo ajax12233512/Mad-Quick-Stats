@@ -4,9 +4,111 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=\, initial-scale=1.0">
+
+    <!-- Bulma -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
     <title>Mad Quick Stats</title>
 </head>
 <body>
-    <h1>Mad Quick Stats</h1>
+    <!-- Header container -->
+    <div class="tile is-ancestor">
+        <div class="tile is-parent is-12">
+            <div class="tile is-child box">
+                <h1 class="title">Mad Quick Stats</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">   
+
+            <div class="tile is-child is-6 box">
+                <!-- Left Filter -->
+                <div class="field">
+                    <label> <h2 class="title">Filter</h2> </label>
+                    <div class="control">
+                        <div class="select">
+                            <select>
+                                <option value="">Option 1</option>
+                                <option value="">Option 2</option>
+                                <option value="">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>               
+            </div>
+
+            <div class="tile is-child is-6 box">
+                <!-- Right Filter -->
+                <div class="field">
+                    <label> <h2 class="title">Filter</h2> </label>
+                    <div class="control">
+                        <div class="select">
+                            <select>
+                                <option value="">Option 1</option>
+                                <option value="">Option 2</option>
+                                <option value="">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="tile is-ancestor">
+        <!-- List of Teams -->
+        <div class="tile is-parent is-4">
+            <div class="tile is-child box">
+                <p class="title">List of Teams</p>
+            </div>
+        </div>
+
+        <!-- Contains the wtv data the API returns -->
+        <div class="tile is-vertical">
+            <!-- 1st Row -->
+            <div class="tile is-parent">
+                <div class="tile is-child box">
+                    <p class="title">Data</p>
+                    <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, dolor.</p>
+                </div>
+            </div>
+            <!-- 2nd Row -->
+            <div class="tile is-parent">
+                <div class="tile is-child box">
+                    <p class="title">Data</p>
+                    <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, dolor.</p>
+                </div>
+            </div>
+            <!-- 3rd Row -->
+            <div class="tile">
+                <div class="tile is-parent">
+                    <div class="tile is-child box">
+                        <p class="title">Data</p>
+                        <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, dolor.</p>
+                    </div>
+                </div>
+                <div class="tile is-parent">
+                    <div class="tile is-child box">
+                        <p class="title">Data</p>
+                        <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, dolor.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    
 </body>
 </html>
