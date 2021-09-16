@@ -7,3 +7,63 @@
     font-family: 'Rubik', sans-serif;
 }
 
+body{
+    padding: 5%;
+    /* background-color: rgb(0, 0, 0, .9); */
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(img/football-field.jpg);
+
+}
+
+#search-results{
+    margin-top: 1vh;
+    max-height: 30vh;
+    overflow-y: auto;
+    /* scrollbar-color: #00CDAC #02AAB0; */
+}
+
+#search-results li{
+    cursor: pointer;
+    background-color: rgb(0, 0, 0, 0);
+}
+
+#search-results li:hover{
+    background-color: rgb(0, 0, 0, .5);
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+/* Keeps the filter in a single row */
+.custom-filters{
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-button{
+    width: 48%;
+    margin: 0 auto;
+}
+
+.hide-results{
+    width: 48%;
+    margin: 0 auto;
+}
+
+.custom-filters{
+}
+
+.custom-search-input{
+    width: 96.6%;
+    justify-self: center;
+    /* margin: 0 auto; */
+}
+
+.custom-filter-item{
+    width: 20%;
+}
+

@@ -30,31 +30,32 @@
 
     <!-- Filters -->
     <div class="tile is-ancestor">
-        <div class="tile is-parent">   
+        <div class="tile is-parent custom-filters">   
 
-            <div class="tile is-child is-6 box">
+            <div class="tile is-child box  custom-filter-item">
                 <!-- Left Filter -->
                 <div class="field">
-                    <label> <h2 class="title">Filter</h2> </label>
+                    <label for="user-input-sport"> <h2 class="title">Sport</h2> </label>
                     <div class="control">
                         <div class="select">
-                            <select>
-                                <option value="">Option 1</option>
-                                <option value="">Option 2</option>
-                                <option value="">Option 3</option>
+                            <select id="user-input-sport">
+                                <option value="">All</option>
+                                <option value="Basketball">Basketball</option>
+                                <option value="Hockey">Hockey</option>
+                                <option value="Soccer">Soccer</option>
                             </select>
                         </div>
                     </div>
                 </div>               
             </div>
 
-            <div class="tile is-child is-6 box">
+            <div class="tile is-child box custom-filter-item"">
                 <!-- Right Filter -->
                 <div class="field">
-                    <label> <h2 class="title">Filter</h2> </label>
+                    <label for="user-input-year"> <h2 class="title">Year</h2> </label>
                     <div class="control">
                         <div class="select">
-                            <select>
+                            <select id="user-input-year">
                                 <option value="">Option 1</option>
                                 <option value="">Option 2</option>
                                 <option value="">Option 3</option>
@@ -68,11 +69,17 @@
     </div>
 
 
-    <div class="tile is-ancestor">
+    <div data-teamId="" class="tile is-ancestor">
         <!-- List of Teams -->
         <div class="tile is-parent is-4">
             <div class="tile is-child box">
                 <p class="title">List of Teams</p>
+                <input id="searchbar" class="input custom-search-input" type="text" placeholder="Search">
+                <button class="button search-button">Search</button>
+                <button class="button hide-results">Hide</button>
+                <ul id="search-results" class="hide">
+
+                </ul>
             </div>
         </div>
 
@@ -81,32 +88,32 @@
             <!-- 1st Row -->
             <div class="tile is-parent">
                 <div class="tile is-child box">
-                    <p class="title">Data</p>
+                    <p class="title"><span id="team-name">Team Name</span></p>
                     <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, dolor.</p>
 
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Some Data Head</th>
-                                <th>Some Data Head</th>
-                                <th>Some Data Head</th>
-                                <th>Some Data Head</th>
+                                <th></th>
+                                <th>Wins</th>
+                                <th>Losses</th>
+                                <th>Win %</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Some Data Foot</th>
-                                <th>Some Data Foot</th>
-                                <th>Some Data Foot</th>
-                                <th>Some Data Foot</th>
+                                <th></th>
+                                <th>Wins</th>
+                                <th>Losses</th>
+                                <th>Win %</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             <tr>
                                 <th>1</th>
-                                <td>Data</td>
-                                <td>Data</td>
-                                <td>Data</td>
+                                <td><span id="one"></span></td>
+                                <td><span id="two"></span></td>
+                                <td><span id="three"></Span></td>
                             </tr>
                             <tr>
                                 <th>2</th>
@@ -152,6 +159,6 @@
 
     </div>
 
-    
+    <script src="/assets/data.js"></script>
 </body>
 </html>
