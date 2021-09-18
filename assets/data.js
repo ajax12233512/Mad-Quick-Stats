@@ -7,6 +7,12 @@ var three = document.getElementById('three');
 var hideResults = document.querySelector('.hide-results');
 var userInputSport = document.getElementById('user-input-sport');
 var searchbar = document.getElementById('searchbar');
+var tbody = document.getElementById('games-body');
+var playersBody = document.getElementById('players-body');
+
+
+//Moment Js
+var m = moment();
 
 // searchbar.addEventListener('click', autofill);
 searchButton.addEventListener('click', getTeams);
@@ -14,14 +20,10 @@ hideResults.addEventListener('click', function(){
     searchResults.classList.remove('show');
 })
 
-
-
 function getUserInput(){
     var sport = userInputSport.value;
     return sport;
 }
-
-
 
 function getTeams(){
 
@@ -81,43 +83,116 @@ function getTeams(){
             })
         })
     }
-
-
-
 }
 
 
 
+//Get Basketball information
 function getTeamInfo(event){
     // console.log(event.explicitOriginalTarget.attributes[0].nodeValue);
     teamName.innerText = event.explicitOriginalTarget.attributes[1].nodeValue;
     console.log(event);
     var teamId = event.explicitOriginalTarget.attributes[0].nodeValue;
-    fetch(`https://api-nba-v1.p.rapidapi.com/standings/standard/2019/teamId/${teamId}`, {
+
+    //Get baskketball players
+    fetch(`https://api-nba-v1.p.rapidapi.com/players/teamId/${teamId}`, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+            "x-rapidapi-key": "2bcab9ead3msh0012ca30e3965cdp19bdc2jsn9ec5386c7f85"
+            }
+        })
+        .then(function (response){
+            return response.json();
+        })
+        .then(function(data){
+            // console.log(data);
+            playersBody.innerHTML = "";
+            var playersArray = data.api.players;
+            playersArray.forEach(element => {
+                var playerNumber = element.leagues.standard.jersey;
+                // console.log(playerNumber);
+                var playerFirstName = element.firstName;
+                var playerLastName = element.lastName;
+                var playerCountry = element.country;
+
+                var playerNumberEL = document.createElement('th');
+                var firstNameEL = document.createElement('td');
+                var lastNameEL = document.createElement('td');
+                var countryEl = document.createElement('td');
+                var newTableRow = document.createElement('tr');
+
+                playerNumberEL.innerText = playerNumber;
+                firstNameEL.innerText = playerFirstName;
+                lastNameEL.innerText = playerLastName;
+                countryEl.innerText = playerCountry;
+
+                newTableRow.appendChild(playerNumberEL);
+                newTableRow.appendChild(firstNameEL);
+                newTableRow.appendChild(lastNameEL);
+                newTableRow.appendChild(countryEl);
+
+                playersBody.appendChild(newTableRow);
+            })
+        })
+
+    //get basketball games games
+    fetch(`https://api-nba-v1.p.rapidapi.com/games/teamId/${teamId}`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
             "x-rapidapi-key": "2bcab9ead3msh0012ca30e3965cdp19bdc2jsn9ec5386c7f85"
         }
     })
-    .then(response => {
+    .then( response => {
         return response.json();
     })
-    .then(function(data){
-        console.log(data);
-        
-        // teamName.innerText = even.
-        one.innerText = data.api.standings[0].win;
-        two.innerText = data.api.standings[0].loss;
-        three.innerText = data.api.standings[0].winPercentage;
-        // one.innerText = data.api.standings[0].win;
+    .then( data => {
+        gamesArray = data.api.games;
+
+        //Find the next upcoming game
+        var startingGameIndex = gamesArray.find( element => {
+            var date = element.startTimeUTC.substring(0, 10);
+            momentDate = moment(date, "YYYY-MM-DD");
+            return momentDate.isAfter(m);          
+        } );
+        var indexNum = gamesArray.indexOf(startingGameIndex) - 1;   
+        console.log(startingGameIndex);
+        //Get the last 5 basketball games
+        for(k = 0; k < 5; k++)
+        {
+            var targetTeam;
+            if(gamesArray[indexNum - k].hTeam.fullName.includes(teamName.innerText))
+            {
+                targetTeam = gamesArray[indexNum - k].hTeam;
+            }
+            else if(gamesArray[indexNum - k].vTeam.fullName.includes(teamName.innerText))
+            {
+                targetTeam = gamesArray[indexNum - k].vTeam;
+            }
+
+            //Display values
+            var homeTeamName = gamesArray[indexNum - k].hTeam.shortName;
+            var awayTeamName = gamesArray[indexNum - k].vTeam.shortName;
+            var homeScore = gamesArray[indexNum - k].hTeam.score.points;
+            var awayScore = gamesArray[indexNum - k].vTeam.score.points;
+            var thisRow = tbody.children[k];
+            console.log(tbody);
+            console.log(thisRow);
+            thisRow.children[1].children[0].innerText = homeScore + "-" + awayScore; 
+            thisRow.children[2].children[0].innerText = homeTeamName;
+            thisRow.children[3].children[0].innerText = awayTeamName;
+
+            //Color Code wins and losses
+            if(parseInt(homeScore) < parseInt(awayScore) && parseInt(homeScore) == targetTeam.score.points)
+                thisRow.style.color = 'red';
+            else if( parseInt(homeScore) > parseInt(awayScore) && parseInt(homeScore) == targetTeam.score.points )   
+                thisRow.style.color = 'green';
+            else if( parseInt(homeScore) > parseInt(awayScore) && parseInt(awayScore) == targetTeam.score.points )   
+                thisRow.style.color = 'red';
+            else if( parseInt(homeScore) < parseInt(awayScore) && parseInt(awayScore) == targetTeam.score.points )   
+                thisRow.style.color = 'green';
+        }
     })
-    .catch(function(){
-        console.log('error');
-        one.innerText = "Could not get Data";
-        two.innerText = "Could not get Data";
-        three.innerText = "Could not get Data";
-    })
-    
 }
 

@@ -32,24 +32,24 @@
     <div class="tile is-ancestor">
         <div class="tile is-parent custom-filters">   
 
-            <div class="tile is-child box  custom-filter-item">
+            <div class="tile is-child box custom-filter-item mx-1">
                 <!-- Left Filter -->
                 <div class="field">
                     <label for="user-input-sport"> <h2 class="title">Sport</h2> </label>
                     <div class="control">
                         <div class="select">
                             <select id="user-input-sport">
-                                <option value="">All</option>
+                                <!-- <option value="">All</option> -->
                                 <option value="Basketball">Basketball</option>
-                                <option value="Hockey">Hockey</option>
-                                <option value="Soccer">Soccer</option>
+                                <!-- <option value="Hockey">Hockey</option> -->
+                                <!-- <option value="Soccer">Soccer</option> -->
                             </select>
                         </div>
                     </div>
                 </div>               
             </div>
 
-            <div class="tile is-child box custom-filter-item"">
+            <div class="tile is-child box custom-filter-item mx-1">
                 <!-- Right Filter -->
                 <div class="field">
                     <label for="user-input-year"> <h2 class="title">Year</h2> </label>
@@ -95,37 +95,49 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Wins</th>
-                                <th>Losses</th>
-                                <th>Win %</th>
+                                <th>Score</th>
+                                <th>Home</th>
+                                <th>Away</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th></th>
-                                <th>Wins</th>
-                                <th>Losses</th>
-                                <th>Win %</th>
+                                <th>Score</th>
+                                <th>Home</th>
+                                <th>Away</th>
                             </tr>
                         </tfoot>
-                        <tbody>
-                            <tr>
+                        <tbody id="games-body">
+                            <tr id="game-1">
                                 <th>1</th>
-                                <td><span id="one"></span></td>
-                                <td><span id="two"></span></td>
-                                <td><span id="three"></Span></td>
+                                <td><span id="game-1-score">-</span></td>
+                                <td><span id="game-1-home">-</span></td>
+                                <td><span id="game-1-away">-</Span></td>
                             </tr>
                             <tr>
                                 <th>2</th>
-                                <td>Data</td>
-                                <td>Data</td>
-                                <td>Data</td>
+                                <td><span id="game-2-score">-</span></td>
+                                <td><span id="game-2-home">-</span></td>
+                                <td><span id="game-2-away">-</span></td>
                             </tr>
                             <tr>
                                 <th>3</th>
-                                <td>Data</td>
-                                <td>Data</td>
-                                <td>Data</td>
+                                <td><span id="game-3-score">-</span></td>
+                                <td><span id="game-3-home">-</span></td>
+                                <td><span id="game-3-away">-</span></td>
+                            </tr>
+                            <tr>
+                                <th>4</th>
+                                <td><span id="game-4-score">-</span></td>
+                                <td><span id="game-4-home">-</span></td>
+                                <td><span id="game-4-away">-</span></td>
+                            </tr>
+                            <tr>
+                                <th>5</th>
+                                <td><span id="game-5-score">-</span></td>
+                                <td><span id="game-5-home">-</span></td>
+                                <td><span id="game-5-away">-</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -137,6 +149,27 @@
                 <div class="tile is-child box">
                     <p class="title">Data</p>
                     <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, dolor.</p>
+                    <table id="players-ctn" class="table">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Country</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Number</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Country</th>
+                            </tr>
+                        </tfoot>
+                        <tbody id="players-body">
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!-- 3rd Row -->
@@ -159,6 +192,8 @@
 
     </div>
 
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="/assets/data.js"></script>
 </body>
 </html>
