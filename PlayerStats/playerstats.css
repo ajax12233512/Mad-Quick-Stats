@@ -1,0 +1,17 @@
+#stats {
+    background-color: #9F0000;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 15px;
+}
+#T1{
+    color: #F3DFDF
+}
+#stats-title{
+    color:#F3DFDF;
+    font-size: 20px;
+}
+#img {
+    position: static;
+    
+}
