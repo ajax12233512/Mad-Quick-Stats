@@ -79,21 +79,15 @@ fetch("https://statsapi.web.nhl.com/api/v1/standings/regularSeason")
         tableRow.appendChild(teamLossesEl);
         tableRow.appendChild(teamTiesEl);
         tableRow.appendChild(teamPointsEl);
-
         // (AppendRowtowhere?).appendChild(tableRow);
     })
 
     teamsArrC.forEach(element =>{
         var teamName = element.team.name;
-        // console.log(teamName)
         var teamWins = element.leagueRecord.wins
-        // console.log(teamWins)
         var teamLosses = element.leagueRecord.losses
-        // console.log(teamLosses)
         var teamTies = element.leagueRecord.ot
-        // console.log(teamTies) 
         var teamPoints = element.points
-        // console.log(teamPoints)
 
         var tableRow = document.createElement('tr')
         var teamNameEl = document.createElement('th')
@@ -113,21 +107,16 @@ fetch("https://statsapi.web.nhl.com/api/v1/standings/regularSeason")
         tableRow.appendChild(teamLossesEl);
         tableRow.appendChild(teamTiesEl);
         tableRow.appendChild(teamPointsEl);
-
         // (AppendRowtowhere?).appendChild(tableRow);
     })
 
     teamsArrE.forEach(element =>{
         var teamName = element.team.name;
-        // console.log(teamName);
         var teamWins = element.leagueRecord.wins;
-        // console.log(teamWins);
         var teamLosses = element.leagueRecord.losses;
-        // console.log(teamLosses);
         var teamTies = element.leagueRecord.ot;
-        // console.log(teamTies);
         var teamPoints = element.points;
-        // console.log(teamPoints);
+
 
         var tableRow = document.createElement('tr')
         var teamNameEl = document.createElement('th')
@@ -147,22 +136,16 @@ fetch("https://statsapi.web.nhl.com/api/v1/standings/regularSeason")
         tableRow.appendChild(teamLossesEl);
         tableRow.appendChild(teamTiesEl);
         tableRow.appendChild(teamPointsEl);
-
         // (AppendRowtowhere?).appendChild(tableRow);
 
     })
 
     teamsArrN.forEach(element =>{
         var teamName = element.team.name;
-        // console.log(teamName)
         var teamWins = element.leagueRecord.wins
-        // console.log(teamWins)
         var teamLosses = element.leagueRecord.losses
-        // console.log(teamLosses)
         var teamTies = element.leagueRecord.ot
-        // console.log(teamTies) 
         var teamPoints = element.points
-        // console.log(teamPoints)
 
         var tableRow = document.createElement('tr')
         var teamNameEl = document.createElement('th')
@@ -182,12 +165,8 @@ fetch("https://statsapi.web.nhl.com/api/v1/standings/regularSeason")
         tableRow.appendChild(teamLossesEl);
         tableRow.appendChild(teamTiesEl);
         tableRow.appendChild(teamPointsEl);
-
         // (AppendRowtowhere?).appendChild(tableRow);
-    })
-
-
-	
+    })	
 })
 
 .catch(err => {
