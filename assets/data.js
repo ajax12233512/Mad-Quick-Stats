@@ -1,4 +1,4 @@
-var searchResults = document.getElementById('search-results')
+var searchResults = document.getElementById('search-results');
 var searchButton = document.querySelector('.search-button');
 var teamName = document.getElementById('team-name');
 var one = document.getElementById('one');
@@ -10,13 +10,12 @@ var searchbar = document.getElementById('searchbar');
 var tbody = document.getElementById('games-body');
 var playersBody = document.getElementById('players-body');
 
-
 //Moment Js
 var m = moment();
 
 // searchbar.addEventListener('click', autofill);
 searchButton.addEventListener('click', getTeams);
-hideResults.addEventListener('click', function(){
+hideResults.addEventListener('click', function() {
     searchResults.classList.remove('show');
 })
 
@@ -83,6 +82,10 @@ function getTeams(){
             })
         })
     }
+    else if(userInputSport == 'Hockey')
+    {
+      
+    }
 }
 
 
@@ -132,7 +135,9 @@ function getTeamInfo(event){
                 newTableRow.appendChild(lastNameEL);
                 newTableRow.appendChild(countryEl);
 
+                
                 playersBody.appendChild(newTableRow);
+                
             })
         })
 
