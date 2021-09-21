@@ -22,7 +22,7 @@
     <!-- Header container -->
     <div class="tile is-ancestor animate__animated animate__backInDown">
         <div class="tile is-parent is-12">
-            <div class="tile is-child box">
+            <div class="tile is-child box custom-title">
                 <h1 class="title">Mad Quick Stats</h1>
             </div>
         </div>
@@ -32,7 +32,7 @@
     <div class="tile is-ancestor">
         <div class="tile is-parent custom-filters">   
 
-            <div class="tile is-child box custom-filter-item mx-1">
+            <div class="tile is-child box custom-filter-item mx-1 custom-tile-bg-color1">
                 <!-- Left Filter -->
                 <div class="field">
                     <label for="user-input-sport"> <h2 class="title">Sport</h2> </label>
@@ -41,7 +41,7 @@
                             <select id="user-input-sport">
                                 <!-- <option value="">All</option> -->
                                 <option value="Basketball">Basketball</option>
-                                <!-- <option value="Hockey">Hockey</option> -->
+                                <option value="Hockey">Hockey</option>
                                 <!-- <option value="Soccer">Soccer</option> -->
                             </select>
                         </div>
@@ -49,7 +49,7 @@
                 </div>               
             </div>
 
-            <div class="tile is-child box custom-filter-item mx-1">
+            <div class="tile is-child box custom-filter-item mx-1 custom-tile-bg-color1">
                 <!-- Right Filter -->
                 <div class="field">
                     <label for="user-input-year"> <h2 class="title">Year</h2> </label>
@@ -72,12 +72,12 @@
     <div data-teamId="" class="tile is-ancestor">
         <!-- List of Teams -->
         <div class="tile is-parent is-4">
-            <div class="tile is-child box">
+            <div class="tile is-child box custom-tile-bg-color2">
                 <p class="title">List of Teams</p>
                 <input id="searchbar" class="input custom-search-input" type="text" placeholder="Search">
-                <button class="button search-button">Search</button>
+                <button class="button search-button">Search All</button>
                 <button class="button hide-results">Hide</button>
-                <ul id="search-results" class="hide">
+                <ul id="search-results" class="hide animate__animated animate__bounceIn">
 
                 </ul>
             </div>
@@ -87,11 +87,11 @@
         <div class="tile is-vertical">
             <!-- 1st Row -->
             <div class="tile is-parent">
-                <div class="tile is-child box">
+                <div class="tile is-child box custom-tile-bg-color2">
                     <p class="title"><span id="team-name">Team Name</span></p>
                     <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, dolor.</p>
 
-                    <table class="table">
+                    <table class="table custom-table custom-tile-bg-color2">
                         <thead>
                             <tr>
                                 <th></th>
@@ -111,33 +111,33 @@
                         <tbody id="games-body">
                             <tr id="game-1">
                                 <th>1</th>
-                                <td><span id="game-1-score">-</span></td>
-                                <td><span id="game-1-home">-</span></td>
-                                <td><span id="game-1-away">-</Span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-1-score">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-1-home">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-1-away">-</Span></td>
                             </tr>
                             <tr>
                                 <th>2</th>
-                                <td><span id="game-2-score">-</span></td>
-                                <td><span id="game-2-home">-</span></td>
-                                <td><span id="game-2-away">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-2-score">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-2-home">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-2-away">-</span></td>
                             </tr>
                             <tr>
                                 <th>3</th>
-                                <td><span id="game-3-score">-</span></td>
-                                <td><span id="game-3-home">-</span></td>
-                                <td><span id="game-3-away">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-3-score">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-3-home">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-3-away">-</span></td>
                             </tr>
                             <tr>
                                 <th>4</th>
-                                <td><span id="game-4-score">-</span></td>
-                                <td><span id="game-4-home">-</span></td>
-                                <td><span id="game-4-away">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-4-score">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-4-home">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-4-away">-</span></td>
                             </tr>
                             <tr>
                                 <th>5</th>
-                                <td><span id="game-5-score">-</span></td>
-                                <td><span id="game-5-home">-</span></td>
-                                <td><span id="game-5-away">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-5-score">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-5-home">-</span></td>
+                                <td><span class="animate__animated animate__bounceIn" id="game-5-away">-</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -145,11 +145,11 @@
                 </div>
             </div>
             <!-- 2nd Row -->
-            <div class="tile is-parent">
-                <div class="tile is-child box">
+            <div class="tile is-parent ">
+                <div class="tile is-child box custom-tile-bg-color2">
                     <p class="title">Data</p>
                     <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, dolor.</p>
-                    <table id="players-ctn" class="table">
+                    <table id="players-ctn" class="table custom-table">
                         <thead>
                             <tr>
                                 <th>Number</th>
@@ -167,7 +167,7 @@
                             </tr>
                         </tfoot>
                         <tbody id="players-body">
-
+                            <!-- Table for players -->
                         </tbody>
                     </table>
                 </div>
@@ -195,5 +195,6 @@
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="assets/data.js"></script>
+    <script src="assets/hockey.js"></script>
 </body>
 </html>
