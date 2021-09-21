@@ -3,7 +3,7 @@
     --font-color: #201500;
 }
 body {
-    background-image:;
+    background-image:url('../assets/img/football-field.jpg');
 }
 #stats {
     background-color: var(--bg-color);

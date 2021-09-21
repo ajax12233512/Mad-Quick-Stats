@@ -114,8 +114,16 @@ function getTeamInfo(event){
             playersBody.innerHTML = "";
             var playersArray = data.api.players;
             playersArray.forEach(element => {
-                var playerNumber = element.leagues.standard.jersey;
-                // console.log(playerNumber);
+                if(element.leagues.standard.jersey == undefined)
+                {
+                    var playerNumber = 'N/A';
+                }
+                else
+                {
+                    var playerNumber = element.leagues.standard.jersey;
+                }
+                // console.log(element.leagues.standard.jersey);
+                // console.log(element);
                 var playerFirstName = element.firstName;
                 var playerLastName = element.lastName;
                 var playerCountry = element.country;
@@ -163,7 +171,8 @@ function getTeamInfo(event){
             return momentDate.isAfter(m);          
         } );
         var indexNum = gamesArray.indexOf(startingGameIndex) - 1;   
-        console.log(startingGameIndex);
+        // console.log(startingGameIndex);
+
         //Get the last 5 basketball games
         for(k = 0; k < 5; k++)
         {
@@ -187,8 +196,8 @@ function getTeamInfo(event){
             var awayScore = gamesArray[indexNum - k].vTeam.score.points;
             console.log(gamesArray[indexNum - k].vTeam);
             var thisRow = tbody.children[k];
-            console.log(tbody);
-            console.log(thisRow);
+            // console.log(tbody);
+            // console.log(thisRow);
             thisRow.children[1].children[0].innerText = homeScore + "-" + awayScore; 
             thisRow.children[2].children[0].innerText = homeTeamName;
             thisRow.children[3].children[0].innerText = awayTeamName;
