@@ -1,177 +1,222 @@
-// fetch(`https://api-nba-v1.p.rapidapi.com/games/teamId/${teamId}`, {
-//     "method": "GET",
-//     "headers": {
-//         "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-//         "x-rapidapi-key": "2bcab9ead3msh0012ca30e3965cdp19bdc2jsn9ec5386c7f85"
-//     }
-// })
-
-// fetch("https://api-nba-v1.p.rapidapi.com/teams/city/Detroit", {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-// 		"x-rapidapi-key": "cc83e369bemsh3371fa0cf8bff65p1fcbaejsn65f8668e5821"
-// 	}
-// })
-
-// .then( response => {
+// WORK: PLAYER ROSTERS ONCE ID GETS PULLED FOR TEAM
+// fetch("https://statsapi.web.nhl.com/api/v1/teams?expand=team.roster")
+// .then(response => {
 //     return response.json();
 // })
-// .then( data => {
-//     console.log(data)
-//     })
-//example to fetch teams in nba
-// fetch("https://api-nba-v1.p.rapidapi.com/players/teamId/1/", {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-// 		"x-rapidapi-key": "cc83e369bemsh3371fa0cf8bff65p1fcbaejsn65f8668e5821"
-// 	}
+//     .then(data => {
+//         // console.log(data);
+// // team rosters array. Accessed by ID
+//         var nhlTeams = data.teams
+//         // var nhlTeamId = nhlTeams.id 
+//         // console.log(nhlTeamId)
+//         // console.log(nhlTeams)
+//         nhlTeams.forEach(element => {
+            
+// // Player List array per roster
+//             var nhlRoster = element.roster.roster
+//             // console.log(nhlRoster)
+//             nhlRoster.forEach(element => {
+//                 // var playerNameNHL = element.person.fullName
+//                 // console.log(playerNameNHL)
+//                 // var playerNumberNHL = element.jerseyNumber
+//                 // console.log(playerNumberNHL)
+//                 // var playerPositionNHL = element.position.name
+//                 // console.log(playerPositionNHL)
+
+//                 var playerNumberN = document.createElement('th')
+//                 var playerNameNHL = document.createElement('td')
+//                 var playerPositionNHL = document.createElement('td')
+//                 var tableRow = document.createElement('tr')
+
+//                 playerNumberN.innerHTML = playerNumberNHL
+//                 playerNameNHL.innerHTML = playerNameNHL
+//                 playerPositionNHL.innerHTML = playerPositionNHL
+
+//                 tableRow.appendChild(playerNumberN)
+//                 tableRow.appendChild(playerNameN)
+//                 tableRow.appendChild(playerPositionN)
+
+
+//             })
+//         })
+//   })
+
+
+
+
+// NHL Teams list for side menu pull down.
+// HAVE NOW GRABBED IDs FOR EACH TEAM. Added else if statement for hockey
+
+// else (userInputSport.value == 'Hockey'){
+//     searchResults.innerHTML = "";
+//     searchResults.classList.add('show');
+
+// fetch("https://statsapi.web.nhl.com/api/v1/teams")
+// .then(response => {
+//     return response.json();
 // })
+//     .then(data => {
+//         console.log(data);
+//         var nhlArr = data.teams
+//         // console.log(nhlArr)
+        
+//         nhlArr.forEach(element => {
+//             var teamName = element.name 
+//             console.log(teamName)
+//             var teamId = element.id 
+//             console.log(teamId)
+//             var newLiEl = document.createElement('li');
+//             newLiEl.setAttribute('data-teamId', teamId);
+//             newLiEl.setAttribute('data-teamName', teamName);
+
+//             newLiEl.innerHTML = teamName;
+//             //No access to searResults currently. 
+//             // searchResults.appendChild(newLiEl);
+//             // newLiEl.addEventListener('click', getTeamInfo);
+            
+//         })
+
+//     })   
+
+// //NHL Standings
+// fetch("https://statsapi.web.nhl.com/api/v1/standings/regularSeason")
 // .then(response => {
 //     return response.json();
 // })
 // .then(data => {
-//     console.log(data)})
-	
+//     console.log(data);
+//     var teamsArrW = data.records[0].teamRecords
+//     var teamsArrC = data.records[1].teamRecords
+//     var teamsArrE = data.records[2].teamRecords
+//     var teamsArrN = data.records[3].teamRecords
+
+//     //Array for West Div
+//     teamsArrW.forEach(element =>{
+//         var teamName = element.team.name;
+//         // console.log(teamName)
+//         var teamWins = element.leagueRecord.wins
+//         // console.log(teamWins)
+//         var teamLosses = element.leagueRecord.losses
+//         // console.log(teamLosses)
+//         var teamTies = element.leagueRecord.ot
+//         // console.log(teamTies) 
+//         var teamPoints = element.points
+//         // console.log(teamPoints)
+
+//         var tableRow = document.createElement('tr')
+//         var teamNameEl = document.createElement('th')
+//         var teamWinsEl = document.createElement('td')
+//         var teamLossesEl = document.createElement('td')
+//         var teamTiesEl = document.createElement('td')
+//         var teamPointsEl = document.createElement('td')
+
+//         teamNameEl.innerHTML = teamName
+//         teamWinsEl.innerHTML = teamWins
+//         teamLossesEl.innerHTML = teamLosses
+//         teamTiesEl.innerHTML = teamTies
+//         teamPointsEl.innerHTML = teamPoints
+
+//         tableRow.appendChild(teamNameEl);
+//         tableRow.appendChild(teamWinsEl);
+//         tableRow.appendChild(teamLossesEl);
+//         tableRow.appendChild(teamTiesEl);
+//         tableRow.appendChild(teamPointsEl);
+//         // (AppendRowtowhere?).appendChild(tableRow);
+//     })
+
+//     //Array for Central Div
+//     teamsArrC.forEach(element =>{
+//         var teamName = element.team.name;
+//         var teamWins = element.leagueRecord.wins
+//         var teamLosses = element.leagueRecord.losses
+//         var teamTies = element.leagueRecord.ot
+//         var teamPoints = element.points
+
+//         var tableRow = document.createElement('tr')
+//         var teamNameEl = document.createElement('th')
+//         var teamWinsEl = document.createElement('td')
+//         var teamLossesEl = document.createElement('td')
+//         var teamTiesEl = document.createElement('td')
+//         var teamPointsEl = document.createElement('td')
+
+//         teamNameEl.innerHTML = teamName
+//         teamWinsEl.innerHTML = teamWins
+//         teamLossesEl.innerHTML = teamLosses
+//         teamTiesEl.innerHTML = teamTies
+//         teamPointsEl.innerHTML = teamPoints
+
+//         tableRow.appendChild(teamNameEl);
+//         tableRow.appendChild(teamWinsEl);
+//         tableRow.appendChild(teamLossesEl);
+//         tableRow.appendChild(teamTiesEl);
+//         tableRow.appendChild(teamPointsEl);
+//         // (AppendRowtowhere?).appendChild(tableRow);
+//     })
+
+//     //Array for East Div
+//     teamsArrE.forEach(element =>{
+//         var teamName = element.team.name;
+//         var teamWins = element.leagueRecord.wins;
+//         var teamLosses = element.leagueRecord.losses;
+//         var teamTies = element.leagueRecord.ot;
+//         var teamPoints = element.points;
 
 
-fetch("https://statsapi.web.nhl.com/api/v1/standings/regularSeason")
-.then(response => {
-    console.log(response)
-    return response.json();
-})
-.then(data => {
-    // console.log(data);
+//         var tableRow = document.createElement('tr')
+//         var teamNameEl = document.createElement('th')
+//         var teamWinsEl = document.createElement('td')
+//         var teamLossesEl = document.createElement('td')
+//         var teamTiesEl = document.createElement('td')
+//         var teamPointsEl = document.createElement('td')
 
-    var teamsArrW = data.records[0].teamRecords
-    var teamsArrC = data.records[1].teamRecords
-    var teamsArrE = data.records[2].teamRecords
-    var teamsArrN = data.records[3].teamRecords
+//         teamNameEl.innerHTML = teamName
+//         teamWinsEl.innerHTML = teamWins
+//         teamLossesEl.innerHTML = teamLosses
+//         teamTiesEl.innerHTML = teamTies
+//         teamPointsEl.innerHTML = teamPoints
 
-    teamsArrW.forEach(element =>{
-        var teamName = element.team.name;
-        // console.log(teamName)
-        var teamWins = element.leagueRecord.wins
-        // console.log(teamWins)
-        var teamLosses = element.leagueRecord.losses
-        // console.log(teamLosses)
-        var teamTies = element.leagueRecord.ot
-        // console.log(teamTies) 
-        var teamPoints = element.points
-        // console.log(teamPoints)
+//         tableRow.appendChild(teamNameEl);
+//         tableRow.appendChild(teamWinsEl);
+//         tableRow.appendChild(teamLossesEl);
+//         tableRow.appendChild(teamTiesEl);
+//         tableRow.appendChild(teamPointsEl);
+//         // (AppendRowtowhere?).appendChild(tableRow);
 
-        var tableRow = document.createElement('tr')
-        var teamNameEl = document.createElement('th')
-        var teamWinsEl = document.createElement('td')
-        var teamLossesEl = document.createElement('td')
-        var teamTiesEl = document.createElement('td')
-        var teamPointsEl = document.createElement('td')
+//     })
 
-        teamNameEl.innerHTML = teamName
-        teamWinsEl.innerHTML = teamWins
-        teamLossesEl.innerHTML = teamLosses
-        teamTiesEl.innerHTML = teamTies
-        teamPointsEl.innerHTML = teamPoints
+//     //Array for North Div
+//     teamsArrN.forEach(element =>{
+//         var teamName = element.team.name;
+//         var teamWins = element.leagueRecord.wins
+//         var teamLosses = element.leagueRecord.losses
+//         var teamTies = element.leagueRecord.ot
+//         var teamPoints = element.points
 
-        tableRow.appendChild(teamNameEl);
-        tableRow.appendChild(teamWinsEl);
-        tableRow.appendChild(teamLossesEl);
-        tableRow.appendChild(teamTiesEl);
-        tableRow.appendChild(teamPointsEl);
-        // (AppendRowtowhere?).appendChild(tableRow);
-    })
+//         var tableRow = document.createElement('tr')
+//         var teamNameEl = document.createElement('th')
+//         var teamWinsEl = document.createElement('td')
+//         var teamLossesEl = document.createElement('td')
+//         var teamTiesEl = document.createElement('td')
+//         var teamPointsEl = document.createElement('td')
 
-    teamsArrC.forEach(element =>{
-        var teamName = element.team.name;
-        var teamWins = element.leagueRecord.wins
-        var teamLosses = element.leagueRecord.losses
-        var teamTies = element.leagueRecord.ot
-        var teamPoints = element.points
+//         teamNameEl.innerHTML = teamName
+//         teamWinsEl.innerHTML = teamWins
+//         teamLossesEl.innerHTML = teamLosses
+//         teamTiesEl.innerHTML = teamTies
+//         teamPointsEl.innerHTML = teamPoints
 
-        var tableRow = document.createElement('tr')
-        var teamNameEl = document.createElement('th')
-        var teamWinsEl = document.createElement('td')
-        var teamLossesEl = document.createElement('td')
-        var teamTiesEl = document.createElement('td')
-        var teamPointsEl = document.createElement('td')
+//         tableRow.appendChild(teamNameEl);
+//         tableRow.appendChild(teamWinsEl);
+//         tableRow.appendChild(teamLossesEl);
+//         tableRow.appendChild(teamTiesEl);
+//         tableRow.appendChild(teamPointsEl);
+//         // (AppendRowtowhere?).appendChild(tableRow);
+//     })	
+// })
+//     .catch(err => {
+// 	    console.error(err);
+//     });
 
-        teamNameEl.innerHTML = teamName
-        teamWinsEl.innerHTML = teamWins
-        teamLossesEl.innerHTML = teamLosses
-        teamTiesEl.innerHTML = teamTies
-        teamPointsEl.innerHTML = teamPoints
-
-        tableRow.appendChild(teamNameEl);
-        tableRow.appendChild(teamWinsEl);
-        tableRow.appendChild(teamLossesEl);
-        tableRow.appendChild(teamTiesEl);
-        tableRow.appendChild(teamPointsEl);
-        // (AppendRowtowhere?).appendChild(tableRow);
-    })
-
-    teamsArrE.forEach(element =>{
-        var teamName = element.team.name;
-        var teamWins = element.leagueRecord.wins;
-        var teamLosses = element.leagueRecord.losses;
-        var teamTies = element.leagueRecord.ot;
-        var teamPoints = element.points;
-
-
-        var tableRow = document.createElement('tr')
-        var teamNameEl = document.createElement('th')
-        var teamWinsEl = document.createElement('td')
-        var teamLossesEl = document.createElement('td')
-        var teamTiesEl = document.createElement('td')
-        var teamPointsEl = document.createElement('td')
-
-        teamNameEl.innerHTML = teamName
-        teamWinsEl.innerHTML = teamWins
-        teamLossesEl.innerHTML = teamLosses
-        teamTiesEl.innerHTML = teamTies
-        teamPointsEl.innerHTML = teamPoints
-
-        tableRow.appendChild(teamNameEl);
-        tableRow.appendChild(teamWinsEl);
-        tableRow.appendChild(teamLossesEl);
-        tableRow.appendChild(teamTiesEl);
-        tableRow.appendChild(teamPointsEl);
-        // (AppendRowtowhere?).appendChild(tableRow);
-
-    })
-
-    teamsArrN.forEach(element =>{
-        var teamName = element.team.name;
-        var teamWins = element.leagueRecord.wins
-        var teamLosses = element.leagueRecord.losses
-        var teamTies = element.leagueRecord.ot
-        var teamPoints = element.points
-
-        var tableRow = document.createElement('tr')
-        var teamNameEl = document.createElement('th')
-        var teamWinsEl = document.createElement('td')
-        var teamLossesEl = document.createElement('td')
-        var teamTiesEl = document.createElement('td')
-        var teamPointsEl = document.createElement('td')
-
-        teamNameEl.innerHTML = teamName
-        teamWinsEl.innerHTML = teamWins
-        teamLossesEl.innerHTML = teamLosses
-        teamTiesEl.innerHTML = teamTies
-        teamPointsEl.innerHTML = teamPoints
-
-        tableRow.appendChild(teamNameEl);
-        tableRow.appendChild(teamWinsEl);
-        tableRow.appendChild(teamLossesEl);
-        tableRow.appendChild(teamTiesEl);
-        tableRow.appendChild(teamPointsEl);
-        // (AppendRowtowhere?).appendChild(tableRow);
-    })	
-})
-
-.catch(err => {
-	console.error(err);
-});
 
 
 // NHL API end points.
@@ -220,7 +265,41 @@ fetch("https://statsapi.web.nhl.com/api/v1/standings/regularSeason")
 
 /////////////////////////////////////////////////////////////////////////////
 
+// fetch(`https://api-nba-v1.p.rapidapi.com/games/teamId/${teamId}`, {
+//     "method": "GET",
+//     "headers": {
+//         "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+//         "x-rapidapi-key": "2bcab9ead3msh0012ca30e3965cdp19bdc2jsn9ec5386c7f85"
+//     }
+// })
 
+// fetch("https://api-nba-v1.p.rapidapi.com/teams/city/Detroit", {
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+// 		"x-rapidapi-key": "cc83e369bemsh3371fa0cf8bff65p1fcbaejsn65f8668e5821"
+// 	}
+// })
+
+// .then( response => {
+//     return response.json();
+// })
+// .then( data => {
+//     console.log(data)
+//     })
+//example to fetch teams in nba
+// fetch("https://api-nba-v1.p.rapidapi.com/players/teamId/1/", {
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+// 		"x-rapidapi-key": "cc83e369bemsh3371fa0cf8bff65p1fcbaejsn65f8668e5821"
+// 	}
+// })
+// .then(response => {
+//     return response.json();
+// })
+// .then(data => {
+//     console.log(data)})
 
 
 
