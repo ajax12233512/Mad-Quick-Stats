@@ -1,5 +1,144 @@
-// WORK: PLAYER ROSTERS ONCE ID GETS PULLED FOR TEAM
-// fetch("https://statsapi.web.nhl.com/api/v1/teams?expand=team.roster")
+fetch("https://statsapi.web.nhl.com/api/v1/standings/regularSeason")
+.then(response => {
+    return response.json();
+})
+.then(data => {
+    console.log(data);
+    var teamsArrW = data.records[0].teamRecords
+    var teamsArrC = data.records[1].teamRecords
+    var teamsArrE = data.records[2].teamRecords
+    var teamsArrN = data.records[3].teamRecords
+
+    //Array for West Div
+    teamsArrW.forEach(element =>{
+        var teamName = element.team.name;
+        // console.log(teamName)
+        var teamWins = element.leagueRecord.wins
+        // console.log(teamWins)
+        var teamLosses = element.leagueRecord.losses
+        // console.log(teamLosses)
+        var teamTies = element.leagueRecord.ot
+        // console.log(teamTies) 
+        var teamPoints = element.points
+        // console.log(teamPoints)
+
+        var tableRow = document.createElement('tr')
+        var teamNameEl = document.createElement('th')
+        var teamWinsEl = document.createElement('td')
+        var teamLossesEl = document.createElement('td')
+        var teamTiesEl = document.createElement('td')
+        var teamPointsEl = document.createElement('td')
+        var appendTest = document.querySelector('#testAppend')
+
+        teamNameEl.innerHTML = teamName
+        teamWinsEl.innerHTML = teamWins
+        teamLossesEl.innerHTML = teamLosses
+        teamTiesEl.innerHTML = teamTies
+        teamPointsEl.innerHTML = teamPoints
+
+        tableRow.appendChild(teamNameEl);
+        tableRow.appendChild(teamWinsEl);
+        tableRow.appendChild(teamLossesEl);
+        tableRow.appendChild(teamTiesEl);
+        tableRow.appendChild(teamPointsEl);
+        (appendTest).appendChild(tableRow);
+    })
+
+    //Array for Central Div
+    teamsArrC.forEach(element =>{
+        var teamName = element.team.name;
+        var teamWins = element.leagueRecord.wins
+        var teamLosses = element.leagueRecord.losses
+        var teamTies = element.leagueRecord.ot
+        var teamPoints = element.points
+
+        var tableRow = document.createElement('tr')
+        var teamNameEl = document.createElement('th')
+        var teamWinsEl = document.createElement('td')
+        var teamLossesEl = document.createElement('td')
+        var teamTiesEl = document.createElement('td')
+        var teamPointsEl = document.createElement('td')
+
+        teamNameEl.innerHTML = teamName
+        teamWinsEl.innerHTML = teamWins
+        teamLossesEl.innerHTML = teamLosses
+        teamTiesEl.innerHTML = teamTies
+        teamPointsEl.innerHTML = teamPoints
+
+        tableRow.appendChild(teamNameEl);
+        tableRow.appendChild(teamWinsEl);
+        tableRow.appendChild(teamLossesEl);
+        tableRow.appendChild(teamTiesEl);
+        tableRow.appendChild(teamPointsEl);
+        // (AppendRowtowhere?).appendChild(tableRow);
+    })
+
+    //Array for East Div
+    teamsArrE.forEach(element =>{
+        var teamName = element.team.name;
+        var teamWins = element.leagueRecord.wins;
+        var teamLosses = element.leagueRecord.losses;
+        var teamTies = element.leagueRecord.ot;
+        var teamPoints = element.points;
+
+
+        var tableRow = document.createElement('tr')
+        var teamNameEl = document.createElement('th')
+        var teamWinsEl = document.createElement('td')
+        var teamLossesEl = document.createElement('td')
+        var teamTiesEl = document.createElement('td')
+        var teamPointsEl = document.createElement('td')
+
+        teamNameEl.innerHTML = teamName
+        teamWinsEl.innerHTML = teamWins
+        teamLossesEl.innerHTML = teamLosses
+        teamTiesEl.innerHTML = teamTies
+        teamPointsEl.innerHTML = teamPoints
+
+        tableRow.appendChild(teamNameEl);
+        tableRow.appendChild(teamWinsEl);
+        tableRow.appendChild(teamLossesEl);
+        tableRow.appendChild(teamTiesEl);
+        tableRow.appendChild(teamPointsEl);
+        // (AppendRowtowhere?).appendChild(tableRow);
+
+    })
+
+    //Array for North Div
+    teamsArrN.forEach(element =>{
+        var teamName = element.team.name;
+        var teamWins = element.leagueRecord.wins
+        var teamLosses = element.leagueRecord.losses
+        var teamTies = element.leagueRecord.ot
+        var teamPoints = element.points
+
+        var tableRow = document.createElement('tr')
+        var teamNameEl = document.createElement('th')
+        var teamWinsEl = document.createElement('td')
+        var teamLossesEl = document.createElement('td')
+        var teamTiesEl = document.createElement('td')
+        var teamPointsEl = document.createElement('td')
+
+        teamNameEl.innerHTML = teamName
+        teamWinsEl.innerHTML = teamWins
+        teamLossesEl.innerHTML = teamLosses
+        teamTiesEl.innerHTML = teamTies
+        teamPointsEl.innerHTML = teamPoints
+
+        tableRow.appendChild(teamNameEl);
+        tableRow.appendChild(teamWinsEl);
+        tableRow.appendChild(teamLossesEl);
+        tableRow.appendChild(teamTiesEl);
+        tableRow.appendChild(teamPointsEl);
+        // (AppendRowtowhere?).appendChild(tableRow);
+    })	
+})
+    .catch(err => {
+	    console.error(err);
+    });
+
+// // WORK: PLAYER ROSTERS ONCE ID GETS PULLED FOR TEAM
+// fetch(`https://statsapi.web.nhl.com/api/v1/teams/${event.target.attributes[0].nodeValue}/roster`)
 // .then(response => {
 //     return response.json();
 // })
@@ -13,7 +152,7 @@
 //         nhlTeams.forEach(element => {
             
 // // Player List array per roster
-//             var nhlRoster = element.roster.roster
+//             var nhlRoster = element.roster
 //             // console.log(nhlRoster)
 //             nhlRoster.forEach(element => {
 //                 // var playerNameNHL = element.person.fullName
