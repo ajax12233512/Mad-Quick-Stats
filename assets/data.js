@@ -93,9 +93,10 @@ function getTeams(){
 //Get Basketball information
 function getTeamInfo(event){
     // console.log(event.explicitOriginalTarget.attributes[0].nodeValue);
-    teamName.innerText = event.explicitOriginalTarget.attributes[1].nodeValue;
-    console.log(event);
-    var teamId = event.explicitOriginalTarget.attributes[0].nodeValue;
+    teamName.innerText = event.target.attributes[1].nodeValue;
+    // console.log(event);
+    // console.log(event.target.attributes[1].nodeValue);
+    var teamId = event.target.attributes[0].nodeValue;
 
     //Get baskketball players
     fetch(`https://api-nba-v1.p.rapidapi.com/players/teamId/${teamId}`, {
@@ -166,21 +167,25 @@ function getTeamInfo(event){
         //Get the last 5 basketball games
         for(k = 0; k < 5; k++)
         {
+            console.log(teamName.innerText);
             var targetTeam;
             if(gamesArray[indexNum - k].hTeam.fullName.includes(teamName.innerText))
             {
                 targetTeam = gamesArray[indexNum - k].hTeam;
+                console.log('home');
             }
-            else if(gamesArray[indexNum - k].vTeam.fullName.includes(teamName.innerText))
+            else 
             {
                 targetTeam = gamesArray[indexNum - k].vTeam;
+                console.log('away');
             }
-
+            console.log(targetTeam.score.points);
             //Display values
             var homeTeamName = gamesArray[indexNum - k].hTeam.shortName;
             var awayTeamName = gamesArray[indexNum - k].vTeam.shortName;
             var homeScore = gamesArray[indexNum - k].hTeam.score.points;
             var awayScore = gamesArray[indexNum - k].vTeam.score.points;
+            console.log(gamesArray[indexNum - k].vTeam);
             var thisRow = tbody.children[k];
             console.log(tbody);
             console.log(thisRow);
@@ -189,13 +194,13 @@ function getTeamInfo(event){
             thisRow.children[3].children[0].innerText = awayTeamName;
 
             //Color Code wins and losses
-            if(parseInt(homeScore) < parseInt(awayScore) && parseInt(homeScore) == targetTeam.score.points)
+            if(parseInt(homeScore) < parseInt(awayScore) && parseInt(homeScore) == parseInt(targetTeam.score.points))
                 thisRow.style.color = 'red';
-            else if( parseInt(homeScore) > parseInt(awayScore) && parseInt(homeScore) == targetTeam.score.points )   
+            else if( parseInt(homeScore) > parseInt(awayScore) && parseInt(homeScore) == parseInt(targetTeam.score.points) )   
                 thisRow.style.color = 'green';
-            else if( parseInt(homeScore) > parseInt(awayScore) && parseInt(awayScore) == targetTeam.score.points )   
+            else if( parseInt(homeScore) > parseInt(awayScore) && parseInt(awayScore) == parseInt(targetTeam.score.points) )   
                 thisRow.style.color = 'red';
-            else if( parseInt(homeScore) < parseInt(awayScore) && parseInt(awayScore) == targetTeam.score.points )   
+            else if( parseInt(homeScore) < parseInt(awayScore) && parseInt(awayScore) == parseInt(targetTeam.score.points) )   
                 thisRow.style.color = 'green';
         }
     })
