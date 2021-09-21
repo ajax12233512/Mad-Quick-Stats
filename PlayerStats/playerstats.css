@@ -1,0 +1,27 @@
+:root {
+    --bg-color: #FFA600;
+    --font-color: #201500;
+}
+body {
+    background-image:url('../assets/img/football-field.jpg');
+}
+#stats {
+    background-color: var(--bg-color);
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 15px;
+}
+#T1{
+    color: var(--font-color);
+}
+#stats-title{
+    color:var(--font-color);
+    font-size: 20px;
+}
+#img {
+    position: static;
+    
+}
+td {
+    color: var(--font-color);
+}
