@@ -98,3 +98,17 @@ body{
 .custom-table{
     width: 100%;
 }
+
+@media only screen and (max-width: 493px) {
+    .toggle-country{
+        display: none;
+    }
+
+    .custom-table{
+        overflow:hidden;
+    }
+
+    th, td{
+        padding: 0;
+    }
+}
