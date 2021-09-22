@@ -94,7 +94,7 @@ function getTeamRoster(event){
                     .then(data =>{
                         var dates = data.dates;
                         var last5Games = [5]
-
+                        console.log(dates);
                         //get last 5 games
                         for(k = 0; k < 5; k++){
 
