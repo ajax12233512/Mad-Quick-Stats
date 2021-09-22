@@ -50,7 +50,7 @@ function getTeamRoster(event){
             }
             else if(teamNameArray.length == 3)
             {
-                getNhlTeamColors3(teamNameArray[0], teamNameArray[1], teamNameArray[2],)
+                getNhlTeamColors3(teamNameArray[0], teamNameArray[1], teamNameArray[2],);
             }
 
 
@@ -58,6 +58,7 @@ function getTeamRoster(event){
             var rosterArray = data.roster;
             var filteredRosterArray = rosterArray.filter((element) => element.jerseyNumber != undefined);//Checks for only players that have a jersey number
             filteredRosterArray.forEach((element) => {
+                console.log(element);
                 var playerNumber = element.jerseyNumber;
                 // console.log(playerNumber);
                 var name = element.person.fullName.split(" ");
