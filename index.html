@@ -29,13 +29,13 @@
         </div>
     </div>
 
-    <!-- Filters -->
-    <div class="tile is-ancestor">
-        <div class="tile is-parent custom-filters">   
+    <div data-teamId="" class="tile is-ancestor">
+        <!-- List of Teams -->
+        <div class="tile is-parent is-4">
+            <div class="tile is-child box custom-tile-bg-color2">
 
-            <div class="tile is-child box custom-filter-item mx-1 custom-tile-bg-color1">
-                <!-- Left Filter -->
-                <div class="field">
+                <!-- Feild for selecting sport (old filter spot) -->
+                <div class="field box custom-filter-item mx-1 custom-tile-bg-color1">
                     <label for="user-input-sport"> <h2 class="title">Sport</h2> </label>
                     <div class="control">
                         <div class="select">
@@ -47,39 +47,13 @@
                             </select>
                         </div>
                     </div>
-                </div>               
-            </div>
+                </div>   
 
-            <div class="tile is-child box custom-filter-item mx-1 custom-tile-bg-color1">
-                <!-- Right Filter -->
-                <div class="field">
-                    <label for="user-input-year"> <h2 class="title">Year</h2> </label>
-                    <div class="control">
-                        <div class="select">
-                            <select id="user-input-year">
-                                <option value="">Option 1</option>
-                                <option value="">Option 2</option>
-                                <option value="">Option 3</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-    <div data-teamId="" class="tile is-ancestor">
-        <!-- List of Teams -->
-        <div class="tile is-parent is-4">
-            <div class="tile is-child box custom-tile-bg-color2">
                 <p class="title">List of Teams</p>
-                <input id="searchbar" class="input custom-search-input" type="text" placeholder="Search">
                 <button class="button search-button">Search All</button>
                 <button class="button hide-results">Hide</button>
                 <ul id="search-results" class="hide animate__animated animate__bounceIn">
-
+                    <!-- LIst of teams go here -->
                 </ul>
             </div>
         </div>

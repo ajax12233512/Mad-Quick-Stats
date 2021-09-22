@@ -4,6 +4,8 @@
 }
 body {
     background-image:url('../assets/img/football-field.jpg');
+    padding: 2%;
+    height: 100vh;
 }
 #stats {
     background-color: var(--bg-color);
@@ -24,4 +26,8 @@ body {
 }
 td {
     color: var(--font-color);
+}
+
+.custom-header-color{
+    background-color: orange;
 }
