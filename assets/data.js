@@ -9,6 +9,11 @@ var userInputSport = document.getElementById('user-input-sport');
 var searchbar = document.getElementById('searchbar');
 var tbody = document.getElementById('games-body');
 var playersBody = document.getElementById('players-body');
+var customTeamColor1 = document.getElementById('custom-team-color-1');
+var customTeamColor2 = document.getElementById('custom-team-color-2');
+var customTeamColor3 = document.getElementById('custom-team-color-3');
+var customTeamColor4 = document.getElementById('custom-team-color-4');
+var customTeamColor5 = document.getElementById('custom-team-color-5');
 
 //Moment Js
 var m = moment();
@@ -94,6 +99,19 @@ function getTeams(){
 function getTeamInfo(event){
     // console.log(event.explicitOriginalTarget.attributes[0].nodeValue);
     teamName.innerText = event.target.attributes[1].nodeValue;
+
+    //Fetch the Team Colors
+    var teamNameArray = teamName.innerText.split(' ');
+    if(teamNameArray.length == 2)
+    {
+        getTeamColors2(teamNameArray[0], teamNameArray[1]);
+    }
+    else if(teamNameArray.length == 3)
+    {
+        getTeamColors3(teamNameArray[0], teamNameArray[1], teamNameArray[2],)
+    }
+
+    // console.log(teamNameArray); 
     // console.log(event);
     // console.log(event.target.attributes[1].nodeValue);
     var teamId = event.target.attributes[0].nodeValue;
@@ -213,5 +231,91 @@ function getTeamInfo(event){
                 thisRow.style.color = 'green';
         }
     })
+}
+
+function getTeamColors2(city, name){
+    fetch(`https://api.teamhex.dev/leagues/nba/${city}%20${name}`)
+        .then(function(response){
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.eras[0].colors);
+
+            if(data.eras[0].colors.length == 2)
+            {
+                console.log('team has 3');
+                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
+                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
+                customTeamColor3.style.backgroundColor = data.eras[0].colors[1].hex;
+                customTeamColor4.style.backgroundColor = data.eras[0].colors[1].hex;
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[1].hex;
+            }
+            else if(data.eras[0].colors.length == 3)
+            {
+                console.log('team has 3');
+                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
+                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
+                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
+                customTeamColor4.style.backgroundColor = data.eras[0].colors[2].hex;
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[2].hex;
+            }
+            else if(data.eras[0].colors.length == 4)
+            {
+                console.log('team has 4');
+                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
+                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
+                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
+                customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[3].hex; 
+            }
+            else if(data.eras[0].colors.length == 5)
+            {
+                console.log('team has 5');
+                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
+                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
+                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
+                customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[4].hex; 
+            }
+
+        })       
+}
+
+function getTeamColors3(city, name, name2){
+    fetch(`https://api.teamhex.dev/leagues/nba/${city}%20${name}%20${name2}`)
+        .then(function(response){
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.eras[0].colors);
+            if(data.eras[0].colors.length == 3)
+            {
+                console.log('team has 3');
+                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
+                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
+                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
+                customTeamColor4.style.backgroundColor = data.eras[0].colors[2].hex;
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[2].hex;
+            }
+            else if(data.eras[0].colors.length == 4)
+            {
+                console.log('team has 4');
+                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
+                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
+                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
+                customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[3].hex; 
+            }
+            else if(data.eras[0].colors.length == 5)
+            {
+                console.log('team has 5');
+                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
+                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
+                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
+                customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[4].hex; 
+            }
+
+        })       
 }
 
