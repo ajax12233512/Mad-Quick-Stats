@@ -14,6 +14,13 @@ var customTeamColor2 = document.getElementById('custom-team-color-2');
 var customTeamColor3 = document.getElementById('custom-team-color-3');
 var customTeamColor4 = document.getElementById('custom-team-color-4');
 var customTeamColor5 = document.getElementById('custom-team-color-5');
+var toggleCountry = document.querySelectorAll('.toggle-country');
+
+
+var myStorage = localStorage;
+myStorage.clear();
+
+var localStorageCounter = 0;
 
 //Moment Js
 var m = moment();
@@ -97,6 +104,10 @@ function getTeams(){
 
 //Get Basketball information
 function getTeamInfo(event){
+    toggleCountry[0].style.display = '';
+    toggleCountry[1].style.display = '';
+    myStorage.setItem(localStorageCounter ,event.target.innerText);
+    localStorageCounter++;
     // console.log(event.explicitOriginalTarget.attributes[0].nodeValue);
     teamName.innerText = event.target.attributes[1].nodeValue;
 

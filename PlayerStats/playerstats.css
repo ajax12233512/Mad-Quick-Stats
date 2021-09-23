@@ -31,3 +31,7 @@ td {
 .custom-header-color{
     background-color: orange;
 }
+
+.custom-main-ctn{
+    max-width: 1900px;
+}
