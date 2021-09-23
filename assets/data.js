@@ -20,20 +20,19 @@ var m = moment();
 
 // searchbar.addEventListener('click', autofill);
 searchButton.addEventListener('click', getTeams);
-hideResults.addEventListener('click', function() {
+hideResults.addEventListener('click', function () {
     searchResults.classList.remove('show');
 })
 
-function getUserInput(){
+function getUserInput() {
     var sport = userInputSport.value;
     return sport;
 }
 
-function getTeams(){
+function getTeams() {
 
     //Using if-statement to check the user input for sport
-    if(userInputSport.value == 'Basketball')
-    {
+    if (userInputSport.value == 'Basketball') {
         searchResults.innerHTML = "";
         searchResults.classList.add('show');
         fetch("https://api-nba-v1.p.rapidapi.com/teams/league/vegas", {
@@ -43,28 +42,28 @@ function getTeams(){
                 "x-rapidapi-key": "2bcab9ead3msh0012ca30e3965cdp19bdc2jsn9ec5386c7f85"
             }
         })
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            
-        var teamsArray = data.api.teams;
-            console.log(teamsArray);
-            teamsArray.forEach(element => {
-                var teamId = element.teamId;
-                var newLiEl = document.createElement('li');
-                newLiEl.setAttribute('data-teamId', teamId);
-                newLiEl.setAttribute('data-teamName', element.fullName);
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
 
-                newLiEl.innerText = element.fullName;
-                searchResults.appendChild(newLiEl);
-                newLiEl.addEventListener('click', getTeamInfo);
+                var teamsArray = data.api.teams;
+                console.log(teamsArray);
+                teamsArray.forEach(element => {
+                    var teamId = element.teamId;
+                    var newLiEl = document.createElement('li');
+                    newLiEl.setAttribute('data-teamId', teamId);
+                    newLiEl.setAttribute('data-teamName', element.fullName);
+
+                    newLiEl.innerText = element.fullName;
+                    searchResults.appendChild(newLiEl);
+                    newLiEl.addEventListener('click', getTeamInfo);
+                });
             });
-        });
     }
-    else if(userInputSport.value == 'Soccer'){
+    else if (userInputSport.value == 'Soccer') {
         searchResults.innerHTML = "";
-        var fetchUrlSoccer = `https://api-football-v1.p.rapidapi.com/v2/teams/search/${searchbar.value}`; 
+        var fetchUrlSoccer = `https://api-football-v1.p.rapidapi.com/v2/teams/search/${searchbar.value}`;
         searchResults.classList.add('show');
         fetch(fetchUrlSoccer, {
             "method": "GET",
@@ -73,41 +72,38 @@ function getTeams(){
                 "x-rapidapi-key": "2bcab9ead3msh0012ca30e3965cdp19bdc2jsn9ec5386c7f85"
             }
         })
-        .then(function(response){
-            return response.json()
-        })
-        .then(function(data){
-            console.log(data);
-            resultsArray = data.api.teams;
-            resultsArray.forEach(element => {
-                var newLiEl = document.createElement('li');
-                newLiEl.innerText = element.name;
-
-                searchResults.appendChild(newLiEl);
+            .then(function (response) {
+                return response.json()
             })
-        })
+            .then(function (data) {
+                console.log(data);
+                resultsArray = data.api.teams;
+                resultsArray.forEach(element => {
+                    var newLiEl = document.createElement('li');
+                    newLiEl.innerText = element.name;
+
+                    searchResults.appendChild(newLiEl);
+                })
+            })
     }
-    else if(userInputSport == 'Hockey')
-    {
-      
+    else if (userInputSport == 'Hockey') {
+
     }
 }
 
 
 
 //Get Basketball information
-function getTeamInfo(event){
+function getTeamInfo(event) {
     // console.log(event.explicitOriginalTarget.attributes[0].nodeValue);
     teamName.innerText = event.target.attributes[1].nodeValue;
 
     //Fetch the Team Colors
     var teamNameArray = teamName.innerText.split(' ');
-    if(teamNameArray.length == 2)
-    {
+    if (teamNameArray.length == 2) {
         getTeamColors2(teamNameArray[0], teamNameArray[1]);
     }
-    else if(teamNameArray.length == 3)
-    {
+    else if (teamNameArray.length == 3) {
         getTeamColors3(teamNameArray[0], teamNameArray[1], teamNameArray[2],)
     }
 
@@ -122,22 +118,20 @@ function getTeamInfo(event){
         "headers": {
             "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
             "x-rapidapi-key": "2bcab9ead3msh0012ca30e3965cdp19bdc2jsn9ec5386c7f85"
-            }
-        })
-        .then(function (response){
+        }
+    })
+        .then(function (response) {
             return response.json();
         })
-        .then(function(data){
+        .then(function (data) {
             // console.log(data);
             playersBody.innerHTML = "";
             var playersArray = data.api.players;
             playersArray.forEach(element => {
-                if(element.leagues.standard.jersey == undefined)
-                {
+                if (element.leagues.standard.jersey == undefined) {
                     var playerNumber = 'N/A';
                 }
-                else
-                {
+                else {
                     var playerNumber = element.leagues.standard.jersey;
                 }
                 // console.log(element.leagues.standard.jersey);
@@ -162,9 +156,9 @@ function getTeamInfo(event){
                 newTableRow.appendChild(lastNameEL);
                 newTableRow.appendChild(countryEl);
 
-                
+
                 playersBody.appendChild(newTableRow);
-                
+
             })
         })
 
@@ -176,73 +170,69 @@ function getTeamInfo(event){
             "x-rapidapi-key": "2bcab9ead3msh0012ca30e3965cdp19bdc2jsn9ec5386c7f85"
         }
     })
-    .then( response => {
-        return response.json();
-    })
-    .then( data => {
-        gamesArray = data.api.games;
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            gamesArray = data.api.games;
 
-        //Find the next upcoming game
-        var startingGameIndex = gamesArray.find( element => {
-            var date = element.startTimeUTC.substring(0, 10);
-            momentDate = moment(date, "YYYY-MM-DD");
-            return momentDate.isAfter(m);          
-        } );
-        var indexNum = gamesArray.indexOf(startingGameIndex) - 1;   
-        // console.log(startingGameIndex);
+            //Find the next upcoming game
+            var startingGameIndex = gamesArray.find(element => {
+                var date = element.startTimeUTC.substring(0, 10);
+                momentDate = moment(date, "YYYY-MM-DD");
+                return momentDate.isAfter(m);
+            });
+            var indexNum = gamesArray.indexOf(startingGameIndex) - 1;
+            // console.log(startingGameIndex);
 
-        //Get the last 5 basketball games
-        for(k = 0; k < 5; k++)
-        {
-            console.log(teamName.innerText);
-            var targetTeam;
-            if(gamesArray[indexNum - k].hTeam.fullName.includes(teamName.innerText))
-            {
-                targetTeam = gamesArray[indexNum - k].hTeam;
-                console.log('home');
+            //Get the last 5 basketball games
+            for (k = 0; k < 5; k++) {
+                console.log(teamName.innerText);
+                var targetTeam;
+                if (gamesArray[indexNum - k].hTeam.fullName.includes(teamName.innerText)) {
+                    targetTeam = gamesArray[indexNum - k].hTeam;
+                    console.log('home');
+                }
+                else {
+                    targetTeam = gamesArray[indexNum - k].vTeam;
+                    console.log('away');
+                }
+                console.log(targetTeam.score.points);
+                //Display values
+                var homeTeamName = gamesArray[indexNum - k].hTeam.shortName;
+                var awayTeamName = gamesArray[indexNum - k].vTeam.shortName;
+                var homeScore = gamesArray[indexNum - k].hTeam.score.points;
+                var awayScore = gamesArray[indexNum - k].vTeam.score.points;
+                console.log(gamesArray[indexNum - k].vTeam);
+                var thisRow = tbody.children[k];
+                // console.log(tbody);
+                // console.log(thisRow);
+                thisRow.children[1].children[0].innerText = homeScore + "-" + awayScore;
+                thisRow.children[2].children[0].innerText = homeTeamName;
+                thisRow.children[3].children[0].innerText = awayTeamName;
+
+                //Color Code wins and losses
+                if (parseInt(homeScore) < parseInt(awayScore) && parseInt(homeScore) == parseInt(targetTeam.score.points))
+                    thisRow.style.color = 'red';
+                else if (parseInt(homeScore) > parseInt(awayScore) && parseInt(homeScore) == parseInt(targetTeam.score.points))
+                    thisRow.style.color = 'green';
+                else if (parseInt(homeScore) > parseInt(awayScore) && parseInt(awayScore) == parseInt(targetTeam.score.points))
+                    thisRow.style.color = 'red';
+                else if (parseInt(homeScore) < parseInt(awayScore) && parseInt(awayScore) == parseInt(targetTeam.score.points))
+                    thisRow.style.color = 'green';
             }
-            else 
-            {
-                targetTeam = gamesArray[indexNum - k].vTeam;
-                console.log('away');
-            }
-            console.log(targetTeam.score.points);
-            //Display values
-            var homeTeamName = gamesArray[indexNum - k].hTeam.shortName;
-            var awayTeamName = gamesArray[indexNum - k].vTeam.shortName;
-            var homeScore = gamesArray[indexNum - k].hTeam.score.points;
-            var awayScore = gamesArray[indexNum - k].vTeam.score.points;
-            console.log(gamesArray[indexNum - k].vTeam);
-            var thisRow = tbody.children[k];
-            // console.log(tbody);
-            // console.log(thisRow);
-            thisRow.children[1].children[0].innerText = homeScore + "-" + awayScore; 
-            thisRow.children[2].children[0].innerText = homeTeamName;
-            thisRow.children[3].children[0].innerText = awayTeamName;
-
-            //Color Code wins and losses
-            if(parseInt(homeScore) < parseInt(awayScore) && parseInt(homeScore) == parseInt(targetTeam.score.points))
-                thisRow.style.color = 'red';
-            else if( parseInt(homeScore) > parseInt(awayScore) && parseInt(homeScore) == parseInt(targetTeam.score.points) )   
-                thisRow.style.color = 'green';
-            else if( parseInt(homeScore) > parseInt(awayScore) && parseInt(awayScore) == parseInt(targetTeam.score.points) )   
-                thisRow.style.color = 'red';
-            else if( parseInt(homeScore) < parseInt(awayScore) && parseInt(awayScore) == parseInt(targetTeam.score.points) )   
-                thisRow.style.color = 'green';
-        }
-    })
+        })
 }
 
-function getTeamColors2(city, name){
+function getTeamColors2(city, name) {
     fetch(`https://api.teamhex.dev/leagues/nba/${city}%20${name}`)
-        .then(function(response){
+        .then(function (response) {
             return response.json();
         })
         .then(data => {
             console.log(data.eras[0].colors);
 
-            if(data.eras[0].colors.length == 2)
-            {
+            if (data.eras[0].colors.length == 2) {
                 console.log('team has 3');
                 customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
                 customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
@@ -250,8 +240,7 @@ function getTeamColors2(city, name){
                 customTeamColor4.style.backgroundColor = data.eras[0].colors[1].hex;
                 customTeamColor5.style.backgroundColor = data.eras[0].colors[1].hex;
             }
-            else if(data.eras[0].colors.length == 3)
-            {
+            else if (data.eras[0].colors.length == 3) {
                 console.log('team has 3');
                 customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
                 customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
@@ -259,37 +248,34 @@ function getTeamColors2(city, name){
                 customTeamColor4.style.backgroundColor = data.eras[0].colors[2].hex;
                 customTeamColor5.style.backgroundColor = data.eras[0].colors[2].hex;
             }
-            else if(data.eras[0].colors.length == 4)
-            {
+            else if (data.eras[0].colors.length == 4) {
                 console.log('team has 4');
                 customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
                 customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
                 customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
                 customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[3].hex; 
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[3].hex;
             }
-            else if(data.eras[0].colors.length == 5)
-            {
+            else if (data.eras[0].colors.length == 5) {
                 console.log('team has 5');
                 customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
                 customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
                 customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
                 customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[4].hex; 
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[4].hex;
             }
 
-        })       
+        })
 }
 
-function getTeamColors3(city, name, name2){
+function getTeamColors3(city, name, name2) {
     fetch(`https://api.teamhex.dev/leagues/nba/${city}%20${name}%20${name2}`)
-        .then(function(response){
+        .then(function (response) {
             return response.json();
         })
         .then(data => {
             console.log(data.eras[0].colors);
-            if(data.eras[0].colors.length == 3)
-            {
+            if (data.eras[0].colors.length == 3) {
                 console.log('team has 3');
                 customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
                 customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
@@ -297,25 +283,41 @@ function getTeamColors3(city, name, name2){
                 customTeamColor4.style.backgroundColor = data.eras[0].colors[2].hex;
                 customTeamColor5.style.backgroundColor = data.eras[0].colors[2].hex;
             }
-            else if(data.eras[0].colors.length == 4)
-            {
+            else if (data.eras[0].colors.length == 4) {
                 console.log('team has 4');
                 customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
                 customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
                 customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
                 customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[3].hex; 
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[3].hex;
             }
-            else if(data.eras[0].colors.length == 5)
-            {
+            else if (data.eras[0].colors.length == 5) {
                 console.log('team has 5');
                 customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
                 customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
                 customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
                 customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[4].hex; 
+                customTeamColor5.style.backgroundColor = data.eras[0].colors[4].hex;
             }
 
-        })       
+        })
 }
-
+// Get Team logos
+fetch("https://api-nba-v1.p.rapidapi.com/teams/league/vegas", {
+    "method": "GET",
+    "headers": {
+        "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+        "x-rapidapi-key": "f911a52402msh198488b602ee88fp19d4e6jsnbfef8763303c"
+    }
+})
+    .then(response => {
+        console.log(response);
+        return response.json();
+    })
+    .then(data => {
+        var logosArray = data.api.teams.forEach(element => {
+            var logo = element.logo;
+            console.log(logo);
+            
+        })
+    })
