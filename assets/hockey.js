@@ -245,6 +245,8 @@ fetch("https://statsapi.web.nhl.com/api/v1/standings/regularSeason")
 })
 }
 
+var searchHistory = localStorage.getItem('storedSearch')
+
 var saveToLocalStorage = function () {
     var storageInput = userInputSport.value
     userInputSport.value = '';

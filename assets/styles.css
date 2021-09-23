@@ -121,3 +121,33 @@ body{
         display: none;
     }
 }
+
+#animated-background{ animation: bgfade 15s infinite; background-size:cover; background-position:center; background-color:#000;
+    position:relative; 
+} 
+@keyframes bgfade { 
+    0% { 
+        background-image: url(https://cdn.theathletic.com/app/uploads/2021/09/22142143/GettyImages-1234748428-1-1024x683.jpeg); 
+    } 
+    25% { 
+        background-image: url(https://www.incimages.com/uploaded_files/image/1920x1080/getty_84597134_2000132020009280312_337030.jpg); 
+    } 
+    50% { 
+        background-image: url(https://cdn2.unrealengine.com/fortnite-lebron-james-tune-squad-outfit-1920x1080-ee847eda8322.jpg); 
+    } 
+    75% { 
+        background-image: url(https://cdn.decrypt.co/wp-content/uploads/2021/09/Steph-curry-usa-2014-gID_4.jpeg); 
+    } 
+    100% { 
+        background-image: url(hhttps://cdn.theathletic.com/app/uploads/2021/09/22142143/GettyImages-1234748428-1-1024x683.jpeg); 
+} } 
+/****** add a background overlay *******/
+ #animated-background:before { 
+     content:""; 
+     position:absolute; 
+     top:0; 
+     bottom:0; 
+     left:0; 
+     right:0; 
+     background-color:black; opacity:0.3; 
+}
