@@ -1,9 +1,8 @@
 var userInputSport = document.getElementById('user-input-sport');
 var searchButton = document.querySelector('.search-button');
 var searchResults = document.getElementById('search-results');
-
-//Moment Current day
-var m = moment().format('YYYY-MM-DD');
+// var standings1Body = document.getElementById('standings1-body');
+// var standings2Body = document.getElementById('standings2-body');
 
 searchButton.addEventListener('click', getInfo);
 
@@ -19,11 +18,10 @@ function getInfo(){
         .then(data =>{
             // console.log(data.teams);
             teamsArray = data.teams;
-            teamsArray.forEach( element => {
+            teamsArray.forEach( element =>{
                 // console.log(element);
                 var newLi = document.createElement('li');
                 newLi.setAttribute('data-teamId', element.id);
-                newLi.setAttribute('data-name', element.name);
                 newLi.addEventListener('click', getTeamRoster)
                 newLi.innerText = element.name;
                 searchResults.appendChild(newLi);
@@ -32,210 +30,234 @@ function getInfo(){
     }
 }
 
+
 //Get Hockey roster
 function getTeamRoster(event){
-    // console.log(event);
+    getStandings();
+    console.log(event);
     fetch(`https://statsapi.web.nhl.com/api/v1/teams/${event.target.attributes[0].nodeValue}/roster`)
         .then(response => {
             return response.json();
         })
         .then(data => {
             playersBody.innerHTML = "";
-            teamName.innerText = event.target.innerText;
-            
-            var teamNameArray = teamName.innerText.split(' ');
-            if(teamNameArray.length == 2)
-            {
-                getNhlTeamColors2(teamNameArray[0], teamNameArray[1]);
-            }
-            else if(teamNameArray.length == 3)
-            {
-                getNhlTeamColors3(teamNameArray[0], teamNameArray[1], teamNameArray[2],);
-            }
-
-
             // console.log(data);
             var rosterArray = data.roster;
             var filteredRosterArray = rosterArray.filter((element) => element.jerseyNumber != undefined);//Checks for only players that have a jersey number
             filteredRosterArray.forEach((element) => {
-                console.log(element);
                 var playerNumber = element.jerseyNumber;
                 // console.log(playerNumber);
                 var name = element.person.fullName.split(" ");
                 var playerFirstName = name[0];
                 var playerLastName = name[1];
-
+    
                 var playerNumberEL = document.createElement('th');
                 var firstNameEL = document.createElement('td');
                 var lastNameEL = document.createElement('td');
+                var anchorFirstEl = document.createElement('a')
+                var anchorSecondEl = document.createElement('a')
+                
+
+                anchorFirstEl.setAttribute("href", "playerstats.html")
+                anchorSecondEl.setAttribute("href", "playerstats.html")
+
+                anchorFirstEl.innerText = playerFirstName
+                anchorSecondEl.innerText = playerLastName
+              
                 // var countryEl = document.createElement('td');
                 var newTableRow = document.createElement('tr');
 
                 playerNumberEL.innerText = playerNumber;
-                firstNameEL.innerText = playerFirstName;
-                lastNameEL.innerText = playerLastName;
+                // debugger;
+                firstNameEL.appendChild(anchorFirstEl);
+                lastNameEL.appendChild(anchorSecondEl);1
+                
+
                 // countryEl.innerText = playerCountry;
 
                 newTableRow.appendChild(playerNumberEL);
                 newTableRow.appendChild(firstNameEL);
                 newTableRow.appendChild(lastNameEL);
+                //newTableRow.appendChild(positionEl);
                 // newTableRow.appendChild(countryEl);
 
                 // playersBody.classList.add('animate__animated animate__bounceIn');
                 playersBody.appendChild(newTableRow);
 
-                
+                // console.log(element.position.name)
+                var playerPosition = element.position.name
+                var positionEl = document.createElement('td')
+                positionEl.innerText = playerPosition
+                newTableRow.appendChild(positionEl)
             })
-
-            fetch(`https://statsapi.web.nhl.com/api/v1/schedule?teamId=${event.target.attributes[0].nodeValue}&startDate=2021-04-01&endDate=${m}`)
-                    .then(response => {
-                        return response.json();
-                    })
-                    .then(data =>{
-                        var dates = data.dates;
-                        var last5Games = [5]
-                        console.log(dates);
-                        //get last 5 games
-                        for(k = 0; k < 5; k++){
-
-                            last5Games[k] = dates[(dates.length - 1) - k];
-                            
-                            var homeTeamName = last5Games[k].games[0].teams.home.team.name;
-                            var awayTeamName = last5Games[k].games[0].teams.away.team.name;
-                            var homeScore = last5Games[k].games[0].teams.home.score;
-                            var awayScore = last5Games[k].games[0].teams.away.score;
-                            // console.log(gamesArray[indexNum - k].vTeam);
-                            var thisRow = tbody.children[k];
-                            console.log(tbody);
-                            console.log(thisRow);
-                            thisRow.children[1].children[0].innerText = homeScore + "-" + awayScore; 
-                            thisRow.children[2].children[0].innerText = homeTeamName;
-                            thisRow.children[3].children[0].innerText = awayTeamName;
-
-                            //Sets the text to green or red depending on who won and what team is being selected
-                            if(homeTeamName == teamName.innerText)
-                            {
-                                console.log('home team is selected');
-                                if(homeScore < awayScore)
-                                {
-                                    thisRow.style.color = 'red';
-                                }
-                                else
-                                {
-                                    thisRow.style.color = 'green';
-                                }
-                            }
-                            else if(awayTeamName == teamName.innerText)
-                            {
-                                console.log('away team is selected');
-                                if(homeScore < awayScore)
-                                {
-                                    thisRow.style.color = 'green';
-                                }
-                                else
-                                {
-                                    thisRow.style.color = 'red';
-                                }
-                            }
-
-                        }  
-                    })
-
         })
+        
+}
+function getStandings() {
+    standings1.innerHTML = "";
+    standings2.innerHTML = "";
+    standings3.innerHTML = "";
+    standings4.innerHTML = "";
+    console.log("getStandings")
+fetch("https://statsapi.web.nhl.com/api/v1/standings/regularSeason")
+.then(response => {
+    return response.json();
+})
+.then(data => {
+
+    console.log("thisFetch")
+
+
+
+    console.log(data);
+    
+    var teamsArrW = data.records[0].teamRecords
+    var teamsArrC = data.records[1].teamRecords
+    var teamsArrE = data.records[2].teamRecords
+    var teamsArrN = data.records[3].teamRecords
+
+    //Array for West Div
+    teamsArrW.forEach(element =>{
+        var teamName = element.team.name;
+        // console.log(teamName)
+        var teamWins = element.leagueRecord.wins
+        // console.log(teamWins)
+        var teamLosses = element.leagueRecord.losses
+        // console.log(teamLosses)
+        var teamTies = element.leagueRecord.ot
+        // console.log(teamTies) 
+        var teamPoints = element.points
+        // console.log(teamPoints)
+
+        var tableRow = document.createElement('tr')
+        var teamNameEl = document.createElement('th')
+        var teamWinsEl = document.createElement('td')
+        var teamLossesEl = document.createElement('td')
+        var teamTiesEl = document.createElement('td')
+        var teamPointsEl = document.createElement('td')
+        var standings1 = document.querySelector('#standings1-body')
+    
+
+        teamNameEl.innerText = teamName
+        teamWinsEl.innerText = teamWins
+        teamLossesEl.innerText = teamLosses
+        teamTiesEl.innerText = teamTies
+        teamPointsEl.innerText = teamPoints
+
+        tableRow.appendChild(teamNameEl);
+        tableRow.appendChild(teamWinsEl);
+        tableRow.appendChild(teamLossesEl);
+        tableRow.appendChild(teamTiesEl);
+        tableRow.appendChild(teamPointsEl);
+        (standings1).appendChild(tableRow);
+    })
+
+    //Array for East Div
+    teamsArrE.forEach(element =>{
+        var teamName = element.team.name;
+        var teamWins = element.leagueRecord.wins;
+        var teamLosses = element.leagueRecord.losses;
+        var teamTies = element.leagueRecord.ot;
+        var teamPoints = element.points;
+
+
+        var tableRow = document.createElement('tr')
+        var teamNameEl = document.createElement('th')
+        var teamWinsEl = document.createElement('td')
+        var teamLossesEl = document.createElement('td')
+        var teamTiesEl = document.createElement('td')
+        var teamPointsEl = document.createElement('td')
+        var standings2 = document.querySelector('#standings2-body')
+
+        teamNameEl.innerHTML = teamName
+        teamWinsEl.innerHTML = teamWins
+        teamLossesEl.innerHTML = teamLosses
+        teamTiesEl.innerHTML = teamTies
+        teamPointsEl.innerHTML = teamPoints
+
+        tableRow.appendChild(teamNameEl);
+        tableRow.appendChild(teamWinsEl);
+        tableRow.appendChild(teamLossesEl);
+        tableRow.appendChild(teamTiesEl);
+        tableRow.appendChild(teamPointsEl);
+        (standings2).appendChild(tableRow);
+    })
+
+      //Array for North Div
+        teamsArrN.forEach(element =>{
+            var teamName = element.team.name;
+            var teamWins = element.leagueRecord.wins
+            var teamLosses = element.leagueRecord.losses
+            var teamTies = element.leagueRecord.ot
+            var teamPoints = element.points
+
+        var tableRow = document.createElement('tr')
+        var teamNameEl = document.createElement('th')
+        var teamWinsEl = document.createElement('td')
+        var teamLossesEl = document.createElement('td')
+        var teamTiesEl = document.createElement('td')
+        var teamPointsEl = document.createElement('td')
+        var standings3 = document.querySelector('#standings3-body')
+
+        teamNameEl.innerHTML = teamName
+        teamWinsEl.innerHTML = teamWins
+        teamLossesEl.innerHTML = teamLosses
+        teamTiesEl.innerHTML = teamTies
+        teamPointsEl.innerHTML = teamPoints
+
+        tableRow.appendChild(teamNameEl);
+        tableRow.appendChild(teamWinsEl);
+        tableRow.appendChild(teamLossesEl);
+        tableRow.appendChild(teamTiesEl);
+        tableRow.appendChild(teamPointsEl);
+        (standings3).appendChild(tableRow);
+    })	
+
+    //Array for Central Div
+    teamsArrC.forEach(element =>{
+        var teamName = element.team.name;
+        var teamWins = element.leagueRecord.wins
+        var teamLosses = element.leagueRecord.losses
+        var teamTies = element.leagueRecord.ot
+        var teamPoints = element.points
+
+        var tableRow = document.createElement('tr')
+        var teamNameEl = document.createElement('th')
+        var teamWinsEl = document.createElement('td')
+        var teamLossesEl = document.createElement('td')
+        var teamTiesEl = document.createElement('td')
+        var teamPointsEl = document.createElement('td')
+        var standings4 = document.querySelector('#standings4-body')
+
+        teamNameEl.innerHTML = teamName
+        teamWinsEl.innerHTML = teamWins
+        teamLossesEl.innerHTML = teamLosses
+        teamTiesEl.innerHTML = teamTies
+        teamPointsEl.innerHTML = teamPoints
+
+        tableRow.appendChild(teamNameEl);
+        tableRow.appendChild(teamWinsEl);
+        tableRow.appendChild(teamLossesEl);
+        tableRow.appendChild(teamTiesEl);
+        tableRow.appendChild(teamPointsEl);
+        (standings4).appendChild(tableRow);
+    })
+})
 }
 
-function getNhlTeamColors2(city, name){
-    fetch(`https://api.teamhex.dev/leagues/nhl/${city}%20${name}`)
-        .then(function(response){
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);
+var saveToLocalStorage = function () {
+    var storageInput = userInputSport.value
+    userInputSport.value = '';
 
-            if(data.eras[0].colors.length == 2)
-            {
-                console.log('team has 3');
-                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
-                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor3.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor4.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[1].hex;
-            }
-            else if(data.eras[0].colors.length == 3)
-            {
-                console.log('team has 3');
-                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
-                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
-                customTeamColor4.style.backgroundColor = data.eras[0].colors[2].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[2].hex;
-            }
-            else if(data.eras[0].colors.length == 4)
-            {
-                console.log('team has 4');
-                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
-                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
-                customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[3].hex; 
-            }
-            else if(data.eras[0].colors.length == 5)
-            {
-                console.log('team has 5');
-                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
-                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
-                customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[4].hex; 
-            }
-
-        })       
+    if(searchHistory){
+        localtStorage.setItem("storedSearch", storageInput + " " + searchHistory)
+        searchedHistory = localStorage.getItem('storedSearch')
+    }   
+        else {
+            localStorage.setItem("storedSearch", storageInput)
+        }
+    
 }
-
-function getNhlTeamColors3(city, name, name2){
-    fetch(`https://api.teamhex.dev/leagues/nhl/${city}%20${name}%20${name2}`)
-        .then(function(response){
-            return response.json();
-        })
-        .then(data => {
-            console.log(data.eras[0].colors);
-
-            if(data.eras[0].colors.length == 2)
-            {
-                console.log('team has 2');
-                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
-                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor3.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor4.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[1].hex;
-            }
-            else if(data.eras[0].colors.length == 3)
-            {
-                console.log('team has 3');
-                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
-                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
-                customTeamColor4.style.backgroundColor = data.eras[0].colors[2].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[2].hex;
-            }
-            else if(data.eras[0].colors.length == 4)
-            {
-                console.log('team has 4');
-                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
-                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
-                customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[3].hex; 
-            }
-            else if(data.eras[0].colors.length == 5)
-            {
-                console.log('team has 5');
-                customTeamColor1.style.backgroundColor = data.eras[0].colors[0].hex;
-                customTeamColor2.style.backgroundColor = data.eras[0].colors[1].hex;
-                customTeamColor3.style.backgroundColor = data.eras[0].colors[2].hex;
-                customTeamColor4.style.backgroundColor = data.eras[0].colors[3].hex;
-                customTeamColor5.style.backgroundColor = data.eras[0].colors[4].hex; 
-            }
-
-        })       
-}
+searchButton.addEventListener("click", function(){
+    saveToLocalStorage()
+})
