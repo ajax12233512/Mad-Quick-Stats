@@ -18,7 +18,7 @@ var toggleCountry = document.querySelectorAll('.toggle-country');
 
 
 var myStorage = localStorage;
-myStorage.clear();
+//myStorage.clear();
 
 var localStorageCounter = 0;
 
