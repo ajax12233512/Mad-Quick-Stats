@@ -1,32 +1,32 @@
-# Mad-Quick-Stats
-Shows stats for sports
-README
-# <Mad-Qucik-Stats>
+# Mad-Quick-Stats <br>
+Shows stats for sports <br>
+README <br>
+# <Mad-Qucik-Stats> <br>
 
-## Description
+## Description <br>
 
- -The motivation was to create a website that provided sports statistics mad quickly
- -It solved the problem of finding all your statistics for your desired sport and desired team in one consolidated page. Rather than the stats being fragmented on different pages
- -We learned how to work in a team throughout this collaborative project, conducting standups and following the scrum methodology
+ -The motivation was to create a website that provided sports statistics mad quickly <br>
+ -It solved the problem of finding all your statistics for your desired sport and desired team in one consolidated page. Rather than the stats being fragmented on different pages <br>
+ -We learned how to work in a team throughout this collaborative project, conducting standups and following the scrum methodology <br> 
 
 
- ## Installation
+ ## Installation <br>
  -There is no installation
 
- ## Technologies
- -Bulma
- -Moment.js
- -NHL API
- -Animation CSS
- -NBA API
- -Team Hex
+ ## Technologies <br>
+ -Bulma <br>
+ -Moment.js <br>
+ -NHL API <br>
+ -Animation CSS <br>
+ -NBA API <br> 
+ -Team Hex <br>
 
  ## Credits
 
- Neil Juanillo: https://github.com/ajax12233512
- Andrew Tran: https://github.com/AndrewT11/
- Gustavo Garcia: https://github.com/RavingIsASport 
- Zaid Mahrouq: https://github.com/zmahrouq
+ Neil Juanillo: https://github.com/ajax12233512 <br>
+ Andrew Tran: https://github.com/AndrewT11/ <br> 
+ Gustavo Garcia: https://github.com/RavingIsASport <br>
+ Zaid Mahrouq: https://github.com/zmahrouq <br>
 
 ## Usage
 
